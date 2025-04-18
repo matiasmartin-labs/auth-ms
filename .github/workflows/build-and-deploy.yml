@@ -19,11 +19,7 @@ jobs:
         with:
           java-version: '21'
           distribution: 'graalvm'
-          components: 'native-image'
 
-      - name: Example step
+      - name: Build native and push image
         run: |
-          echo "GRAALVM_HOME: $GRAALVM_HOME"
-          echo "JAVA_HOME: $JAVA_HOME"
-          java --version
-          native-image --version
+          ./mvnw clean install -Pnative
