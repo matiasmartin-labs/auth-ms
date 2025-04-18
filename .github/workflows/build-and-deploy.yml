@@ -24,26 +24,6 @@ jobs:
         run: |
           ./mvnw clean install
 
-      - name: Upload target folder as artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: target-folder
-          path: target/
-
-  deploy:
-    name: Deploy to Kubernetes
-    runs-on: [self-hosted, Linux, ARM64]
-    needs: build
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Download target folder artifact
-        uses: actions/download-artifact@v3
-        with:
-          name: target-folder
-
       - name: Install kubectl
         run: |
           curl -LO "https://dl.k8s.io/release/v1.28.0/bin/linux/arm64/kubectl"
