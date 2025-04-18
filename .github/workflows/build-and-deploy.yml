@@ -22,7 +22,7 @@ jobs:
 
       - name: Build native and push image
         run: |
-          ./mvnw clean install
+          ./mvnw clean install -Pnative
 
       - name: Install kubectl
         run: |
