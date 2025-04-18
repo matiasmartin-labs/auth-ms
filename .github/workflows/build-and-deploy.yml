@@ -34,4 +34,4 @@ jobs:
       - name: Apply Kubernetes manifests
         run: |
           kubectl apply -f target/kubernetes/kubernetes.yml
-          kubectl rollout status deployment/ms-auth -n default
+          kubectl rollout status deployment/auth-ms -n default
