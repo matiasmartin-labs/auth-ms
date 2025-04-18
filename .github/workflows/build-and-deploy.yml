@@ -1,4 +1,4 @@
-name: Build & Deploy Native Quarkus App
+name: build-native-and-k8s-deploy
 
 on:
   push:
@@ -8,7 +8,7 @@ on:
 jobs:
   build:
     name: Build native and push image
-    runs-on: ubuntu-24.04-arm
+    runs-on: ubuntu-22.04-arm
 
     steps:
       - name: Checkout code
