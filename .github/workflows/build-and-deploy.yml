@@ -24,13 +24,6 @@ jobs:
         run: |
           ./mvnw clean install -Pnative
 
-      - name: Install kubectl
-        run: |
-          curl -LO "https://dl.k8s.io/release/v1.28.0/bin/linux/arm64/kubectl"
-          chmod +x kubectl
-          sudo mv kubectl /usr/local/bin/
-          kubectl version --client
-
       - name: Apply Kubernetes manifests
         run: |
           kubectl apply -f target/kubernetes/kubernetes.yml
