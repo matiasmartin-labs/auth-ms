@@ -8,7 +8,7 @@ on:
 jobs:
   build:
     name: Build native and push image
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04-arm
 
     steps:
       - name: Checkout code
@@ -25,7 +25,7 @@ jobs:
 
       - name: Build native image
         run: |
-          ./mvnw clean install -Pnative -Dquarkus.native.container-build=true -Dquarkus.native.arch=aarch64
+          ./mvnw clean install -Pnative -Dquarkus.native.container-build=true
 
       - name: Upload Kubernetes manifests
         uses: actions/upload-artifact@v4
