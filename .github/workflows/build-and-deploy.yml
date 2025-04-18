@@ -1,0 +1,26 @@
+name: Build & Deploy Native Quarkus App
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build & Push
+    runs-on: [self-hosted, Linux, ARM64]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Java & GraalVM
+        uses: graalvm/setup-graalvm@v1
+        with:
+          version: '22.3.1'
+          java-version: '21'
+          components: 'native-image'
+
+      - name: Build native and push image
+        run: |
+          ./mvnw clean install -Pnative -Dquarkus.container-image.push=true
