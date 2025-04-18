@@ -17,10 +17,13 @@ jobs:
       - name: Set up Java & GraalVM
         uses: graalvm/setup-graalvm@v1
         with:
-          version: '23.0.0'
           java-version: '21'
+          distribution: 'graalvm'
           components: 'native-image'
 
-      - name: Build native and push image
+      - name: Example step
         run: |
-          ./mvnw clean install -Pnative -Dquarkus.container-image.push=true
+          echo "GRAALVM_HOME: $GRAALVM_HOME"
+          echo "JAVA_HOME: $JAVA_HOME"
+          java --version
+          native-image --version
