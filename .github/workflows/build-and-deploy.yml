@@ -8,7 +8,7 @@ on:
 jobs:
   build:
     name: Build native and push image
-    runs-on: ubuntu-22.04-arm
+    runs-on: self-hosted
 
     steps:
       - name: Checkout code
@@ -20,12 +20,9 @@ jobs:
           java-version: '21'
           distribution: 'graalvm'
 
-      - name: Docker login
-        run: echo "${{ secrets.GHCR_TOKEN }}" | docker login ghcr.io -u matiasmartin00 --password-stdin
-
       - name: Build native image
         run: |
-          ./mvnw clean install -Pnative -Dquarkus.native.container-build=true
+          ./mvnw clean install -Pnative -DskipTests
 
       - name: Upload Kubernetes manifests
         uses: actions/upload-artifact@v4
