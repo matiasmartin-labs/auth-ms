@@ -18,11 +18,11 @@ import jakarta.ws.rs.core.Response;
 import lombok.RequiredArgsConstructor;
 
 @Blocking
-@Path("/v1/users")
+@Path("/v1/auth")
 @RequiredArgsConstructor
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-class UserController {
+class AuthController {
 
     private final CommandBus commandBus;
 
