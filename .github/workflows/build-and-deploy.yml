@@ -20,6 +20,9 @@ jobs:
           java-version: '21'
           distribution: 'graalvm'
 
+      - name: Docker login
+        run: echo "${{ secrets.GHCR_TOKEN }}" | docker login ghcr.io -u matiasmartin00 --password-stdin
+
       - name: Build native image
         run: |
           ./mvnw clean install -Pnative -Dquarkus.native.container-build=true
@@ -29,12 +32,6 @@ jobs:
         with:
           name: k8s-manifests
           path: target/kubernetes/kubernetes.yml
-
-      - name: Docker login
-        run: echo "${{ secrets.GHCR_TOKEN }}" | docker login ghcr.io -u matiasmartin00 --password-stdin
-
-      - name: Docker push
-        run: docker push ghcr.io/matiasmartin00/auth-ms:latest
 
   deploy:
     name: Deploy to Kubernetes
