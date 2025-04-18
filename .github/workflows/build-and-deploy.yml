@@ -25,7 +25,7 @@ jobs:
 
       - name: Build native image
         run: |
-          ./mvnw clean install -Pnative -Dquarkus.native.container-build=true
+          ./mvnw clean install -Pnative -Dquarkus.native.container-build=true -Dquarkus.native.arch=aarch64
 
       - name: Upload Kubernetes manifests
         uses: actions/upload-artifact@v4
