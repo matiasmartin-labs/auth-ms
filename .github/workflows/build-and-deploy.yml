@@ -8,7 +8,7 @@ on:
 jobs:
   build:
     name: Build native and push image
-    runs-on: self-hosted
+    runs-on: ubuntu-24.04-arm
 
     steps:
       - name: Checkout code
@@ -19,6 +19,9 @@ jobs:
         with:
           java-version: '21'
           distribution: 'graalvm'
+
+      - name: Docker login
+        run: echo "${{ secrets.GHCR_TOKEN }}" | docker login ghcr.io -u matiasmartin00 --password-stdin
 
       - name: Build native image
         run: |
