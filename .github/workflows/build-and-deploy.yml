@@ -50,20 +50,17 @@ jobs:
 
       - name: Install kubectl
         run: |
-          curl -LO "https://dl.k8s.io/release/$(curl -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+          VERSION=v1.28.1
+          ARCH=arm64
+          echo "Downloading kubectl version $VERSION for $ARCH"
+          curl -LO "https://dl.k8s.io/release/$VERSION/bin/linux/$ARCH/kubectl"
           chmod +x kubectl
-          sudo mv kubectl /usr/local/bin/
-
-      - name: Validate cluster access
-        run: |
-          kubectl version --client
-          kubectl cluster-info
-          kubectl get ns
+          sudo mv kubectl /usr/local/bin/kubectl
 
       - name: Apply Kubernetes manifests
         run: |
-          kubectl apply -f manifests/kubernetes.yml
+          kubectl apply -f manifests/kubernetes.yml -n matiasmartin-labs
 
       - name: Wait for deployment rollout
         run: |
-          kubectl rollout status deployment/auth-ms -n default --timeout=30s
+          kubectl rollout status deployment/auth-ms -n matiasmartin-labs --timeout=30s
