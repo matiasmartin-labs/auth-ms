@@ -7,16 +7,9 @@ import jakarta.ws.rs.ext.ExceptionMapper;
 import jakarta.ws.rs.ext.Provider;
 
 @Provider
-class ValidationExceptionMapper implements ExceptionMapper<ValidationException> {
+class ValidationExceptionMapper extends HandlerExceptionMapper<ValidationException> {
 
-    @Override
-    public Response toResponse(ValidationException exception) {
-        return Response.status(Response.Status.BAD_REQUEST)
-                .entity(ErrorResponse.builder()
-                        .code(Response.Status.BAD_REQUEST.getReasonPhrase())
-                        .status(Response.Status.BAD_REQUEST.getStatusCode())
-                        .message(exception.getMessage())
-                        .build())
-                .build();
+    ValidationExceptionMapper() {
+        super(Response.Status.BAD_REQUEST);
     }
 }

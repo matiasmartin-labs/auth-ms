@@ -7,15 +7,9 @@ import jakarta.ws.rs.ext.ExceptionMapper;
 import jakarta.ws.rs.ext.Provider;
 
 @Provider
-class InvalidCredentialsExceptionMapper implements ExceptionMapper<InvalidCredentialsException> {
-    @Override
-    public Response toResponse(InvalidCredentialsException exception) {
-        return Response.status(Response.Status.UNAUTHORIZED)
-                .entity(ErrorResponse.builder()
-                        .code(Response.Status.UNAUTHORIZED.getReasonPhrase())
-                        .status(Response.Status.UNAUTHORIZED.getStatusCode())
-                        .message(exception.getMessage())
-                        .build())
-                .build();
+class InvalidCredentialsExceptionMapper extends HandlerExceptionMapper<InvalidCredentialsException> {
+
+    InvalidCredentialsExceptionMapper() {
+        super(Response.Status.UNAUTHORIZED);
     }
 }
