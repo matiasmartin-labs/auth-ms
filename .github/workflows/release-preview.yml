@@ -40,7 +40,7 @@ jobs:
       - name: Calculate next version
         id: calculate_version
         run: |
-          CURRENT_VERSION=$(xmllint --xpath "string(//project/version)" pom.xml)
+          CURRENT_VERSION=$(./mvnw help:evaluate -Dexpression=project.version -q -DforceStdout)
           echo "Current version: $CURRENT_VERSION"
 
           IFS='.' read -r MAJOR MINOR PATCH <<< "$CURRENT_VERSION"
