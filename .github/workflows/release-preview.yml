@@ -33,10 +33,21 @@ jobs:
         with:
           release-type: ${{ steps.release_type.outputs.type }}
 
+      - name: Generate changelog
+        id: changelog
+        run: |
+          echo "body=$(git log --pretty=format:'- %s' origin/main..HEAD)" >> $GITHUB_OUTPUT
+
       - name: Comment on PR
         uses: peter-evans/create-or-update-comment@v4
         with:
           token: ${{ secrets.GH_TOKEN }}
           issue-number: ${{ github.event.pull_request.number }}
           body: |
-            🚀 Next version calculated: **${{ steps.calculate_version.outputs.new-version }}**
+            # 🎉 Release Preview
+
+            ## 🚀 Next Version
+            ![Version](https://img.shields.io/badge/version-${{ steps.calculate_version.outputs.new-version }}-brightgreen)
+            
+            ## 📋 Changelog
+            ${{ steps.changelog.outputs.body }}
