@@ -12,6 +12,12 @@ on:
 
 jobs:
   preview:
+    if: (
+      github.event.pull_request.base.ref == 'main') && (
+      contains(join(github.event.pull_request.labels.*.name, ','), 'release-type/patch') ||
+      contains(join(github.event.pull_request.labels.*.name, ','), 'release-type/minor') ||
+      contains(join(github.event.pull_request.labels.*.name, ','), 'release-type/major')
+      )
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
