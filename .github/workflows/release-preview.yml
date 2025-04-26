@@ -1,0 +1,25 @@
+name: Release Preview
+
+on:
+  pull_request:
+    branches:
+      - main
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - labeled
+
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Print PR Info
+        run: |
+          echo "Pull Request ID: ${{ github.event.pull_request.number }}"
+          echo "Pull Request Title: ${{ github.event.pull_request.title }}"
+          echo "PR Target Branch: ${{ github.event.pull_request.base.ref }}"
+          echo "Triggered by PR targeting main branch."
