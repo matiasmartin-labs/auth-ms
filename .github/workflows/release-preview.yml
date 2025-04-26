@@ -38,7 +38,7 @@ jobs:
           fi
 
       - name: Calculate next version
-        uses: matiasmartin-labs/actions/actions/calculate-mvn-versuon@v1
+        uses: matiasmartin-labs/gha-deployments/calculate-mvn-versuon@main
         with:
           release-type: ${{ steps.set_release_type.outputs.type }}
 
