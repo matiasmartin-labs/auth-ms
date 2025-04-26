@@ -1,4 +1,4 @@
-name: Release Preview
+name: release-preview
 
 on:
   pull_request:
@@ -23,8 +23,47 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Print PR Info
+      - name: Set release type
+        id: set_release_type
         run: |
-          echo "Pull Request ID: ${{ github.event.pull_request.number }}"
-          echo "PR Target Branch: ${{ github.event.pull_request.base.ref }}"
-          echo "Triggered by PR targeting main branch."
+          if echo "${{ toJson(github.event.pull_request.labels) }}" | grep -q 'release-type/major'; then
+            echo "type=major" >> $GITHUB_OUTPUT
+          elif echo "${{ toJson(github.event.pull_request.labels) }}" | grep -q 'release-type/minor'; then
+            echo "type=minor" >> $GITHUB_OUTPUT
+          elif echo "${{ toJson(github.event.pull_request.labels) }}" | grep -q 'release-type/patch'; then
+            echo "type=patch" >> $GITHUB_OUTPUT
+          else
+            echo "No release-type label found."
+            exit 1
+          fi
+
+      - name: Calculate next version
+        id: calculate_version
+        run: |
+          CURRENT_VERSION=$(xmllint --xpath "string(//project/version)" pom.xml)
+          echo "Current version: $CURRENT_VERSION"
+
+          IFS='.' read -r MAJOR MINOR PATCH <<< "$CURRENT_VERSION"
+
+          RELEASE_TYPE="${{ steps.set_release_type.outputs.type }}"
+          echo "Release type: $RELEASE_TYPE"
+
+          if [ "$RELEASE_TYPE" = "major" ]; then
+            MAJOR=$((MAJOR+1))
+            MINOR=0
+            PATCH=0
+          elif [ "$RELEASE_TYPE" = "minor" ]; then
+            MINOR=$((MINOR+1))
+            PATCH=0
+          elif [ "$RELEASE_TYPE" = "patch" ]; then
+            PATCH=$((PATCH+1))
+          fi
+
+          NEW_VERSION="$MAJOR.$MINOR.$PATCH"
+          echo "Next version: $NEW_VERSION"
+
+          echo "new_version=$NEW_VERSION" >> $GITHUB_OUTPUT
+
+      - name: Show next version
+        run: |
+          echo "🚀 The next version: ${{ steps.calculate_version.outputs.new_version }}"
