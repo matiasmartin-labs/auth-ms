@@ -20,6 +20,5 @@ jobs:
       - name: Print PR Info
         run: |
           echo "Pull Request ID: ${{ github.event.pull_request.number }}"
-          echo "Pull Request Title: ${{ github.event.pull_request.title }}"
           echo "PR Target Branch: ${{ github.event.pull_request.base.ref }}"
           echo "Triggered by PR targeting main branch."
