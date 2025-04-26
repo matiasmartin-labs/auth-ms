@@ -38,6 +38,7 @@ jobs:
           fi
 
       - name: Calculate next version
+        id: calculate_version
         uses: matiasmartin-labs/gha-deployments/calculate-mvn-version@main
         with:
           release-type: ${{ steps.set_release_type.outputs.type }}
@@ -48,4 +49,4 @@ jobs:
           token: ${{ secrets.GH_TOKEN }}
           issue-number: ${{ github.event.pull_request.number }}
           body: |
-            🚀 Next version calculated: **${{ steps.calculate_version.outputs.new_version }}**
+            🚀 Next version calculated: **${{ steps.calculate_version.outputs.new-version }}**
