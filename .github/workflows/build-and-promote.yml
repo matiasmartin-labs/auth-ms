@@ -82,7 +82,9 @@ jobs:
           git commit -m "Promote Kubernetes manifests for version ${{ github.event.release.tag_name }}"
           git push origin "deploy-pr-${{ github.event.release.tag_name }}"
 
-      - name: Create a PR for the manifiests
+      - name: Create a PR for the manifests
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh pr create \
             --title "Promote Kubernetes Manifests for version ${{ github.event.release.tag_name }}" \
@@ -90,5 +92,3 @@ jobs:
             --base main \
             --head "deploy-pr-${{ github.event.release.tag_name }}" \
             --repo ${{ github.repository }}
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
