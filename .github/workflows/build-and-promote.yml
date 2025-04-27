@@ -42,7 +42,7 @@ jobs:
   promote:
     name: Promote k8s manifests
     runs-on: ubuntu-24.04-arm
-    needs: build
+    #needs: build
 
     steps:
       - name: Checkout code
