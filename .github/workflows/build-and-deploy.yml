@@ -38,3 +38,32 @@ jobs:
           RELEASE_TAG="${{ github.event.release.tag_name }}"
           
           ./mvnw clean install -Pnative -DskipTests -Dquarkus.container-image.tag=$RELEASE_TAG
+
+  deploy:
+    name: Deploy to Kubernetes
+    runs-on: self-hosted
+    needs: build
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: K8S Renderer
+        uses: matiasmartin-labs/gha-deployments/k8s-renderer@main
+        with:
+          input-dir: ./k8s
+          output-dir: ./k8s/manifests
+          log-level: debug
+          version: ${{ github.event.release.tag_name }}
+          docker-registry: ghcr.io/matiasmartin-labs
+          image-pull-secret: ghcr-secret
+
+      - name: List files in output directory
+        run: |
+          echo "Listing files in output directory:"
+          ls -l ./k8s/manifests  # List all files in the output directory
+
+      - name: Display contents of generated Kubernetes manifests
+        run: |
+          echo "Displaying contents of generated Kubernetes manifests:"
+          cat ./k8s/manifests/*  # Display the contents of each file in the output directory
