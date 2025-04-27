@@ -85,7 +85,7 @@ jobs:
 
       - name: Create a PR for the manifests
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
           gh pr create \
             --title "Promote Kubernetes Manifests for version ${{ github.event.release.tag_name }}" \
