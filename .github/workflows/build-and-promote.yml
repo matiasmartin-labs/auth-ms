@@ -39,9 +39,9 @@ jobs:
           
           ./mvnw clean install -Pnative -DskipTests -Dquarkus.container-image.tag=$RELEASE_TAG
 
-  deploy:
-    name: Deploy to Kubernetes
-    runs-on: self-hosted
+  promote:
+    name: Promote k8s manifests
+    runs-on: ubuntu-24.04-arm
     needs: build
 
     steps:
@@ -58,12 +58,13 @@ jobs:
           docker-registry: ghcr.io/matiasmartin-labs
           image-pull-secret: ghcr-secret
 
-      - name: List files in output directory
+      - name: Checkout k8s-manifests branch
         run: |
-          echo "Listing files in output directory:"
-          ls -l ./k8s/manifests  # List all files in the output directory
+          git fetch origin k8s-manifests
+          git switch k8s-manifests
 
-      - name: Display contents of generated Kubernetes manifests
+      - name: Commit and Push manifests
         run: |
-          echo "Displaying contents of generated Kubernetes manifests:"
-          cat ./k8s/manifests/*  # Display the contents of each file in the output directory
+          git add ./k8s/manifests/*
+          git commit -m "Promote Kubernetes manifests for version ${{ github.event.release.tag_name }}"
+          git push origin k8s-manifests
