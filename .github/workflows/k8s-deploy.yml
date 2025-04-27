@@ -1,7 +1,9 @@
-name: Deploy to Kubernetes
+name: deploy-to-kubernetes
 
 on:
-  push:
+  pull_request:
+    types:
+      - closed
     branches:
       - k8s-manifests
 
