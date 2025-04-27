@@ -1,0 +1,62 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    k8s.renderer/template-version: 1.0.0
+    k8s.renderer/commit: 2124d1bd0dfd53b8f997754e4a32e1b7b12a8fd7
+    k8s.renderer/branch: refs/tags/v1.0.2
+    k8s.renderer/vcs-url: matiasmartin-labs/auth-ms
+    k8s.renderer/render-time: 2025-04-27T19:51:22Z
+  labels:
+    app.kubernetes.io/name: auth-ms
+    app.kubernetes.io/part-of: auth-system
+    app.kubernetes.io/version: v1.0.2
+    app.kubernetes.io/managed-by: k8s.renderer
+  name: auth-ms
+  namespace: matiasmartin-labs
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: auth-ms
+      app.kubernetes.io/part-of: auth-system
+      app.kubernetes.io/version: v1.0.2
+  template:
+    metadata:
+      annotations:
+        k8s.renderer/template-version: 1.0.0
+        k8s.renderer/commit: 2124d1bd0dfd53b8f997754e4a32e1b7b12a8fd7
+        k8s.renderer/branch: refs/tags/v1.0.2
+        k8s.renderer/vcs-url: matiasmartin-labs/auth-ms
+        k8s.renderer/render-time: 2025-04-27T19:51:22Z
+      labels:
+        app.kubernetes.io/name: auth-ms
+        app.kubernetes.io/part-of: auth-system
+        app.kubernetes.io/version: v1.0.2
+        app.kubernetes.io/managed-by: k8s.renderer
+      namespace: matiasmartin-labs
+    spec:
+      containers:
+        - envFrom: 
+            - secretRef:
+                name: psql-credentials 
+          image: ghcr.io/matiasmartin-labs/auth-ms:v1.0.2
+          imagePullPolicy: Always
+          name: auth-ms
+          ports:
+            - containerPort: 8080
+              name: http
+              protocol: TCP
+          volumeMounts: 
+            - mountPath: /etc/keys
+              name: jwt-keys-volume
+              readOnly: true 
+      imagePullSecrets:
+        - name: ghcr-secret
+      volumes: 
+        - name: jwt-keys-volume
+          secret:
+            defaultMode: 420
+            optional: false
+            secretName: jwt-keys  
