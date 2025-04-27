@@ -42,4 +42,4 @@ jobs:
             # 🎉 Release Preview
 
             ## 🚀 Next Version
-            ![Version](https://img.shields.io/badge/version-${{ steps.calculate_version.outputs.new-version }}-brightgreen)
+            ![Version](https://img.shields.io/badge/version-${{ steps.calculate_version.outputs.new-version-tag }}-brightgreen)

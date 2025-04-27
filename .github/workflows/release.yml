@@ -1,0 +1,44 @@
+name: release
+
+on:
+  pull_request:
+    types:
+      - closed
+    branches:
+      - main
+
+jobs:
+  create-release:
+    if: |
+      github.event.pull_request.merged == true &&
+      (
+        contains(github.event.pull_request.labels.*.name, 'release-type/major') ||
+        contains(github.event.pull_request.labels.*.name, 'release-type/minor') ||
+        contains(github.event.pull_request.labels.*.name, 'release-type/patch')
+      )
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Determine release type
+        uses: matiasmartin-labs/gha-deployments/determine-release-type@main
+        id: release_type
+
+      - name: Calculate next version
+        id: calculate_version
+        uses: matiasmartin-labs/gha-deployments/calculate-mvn-version@main
+        with:
+          release-type: ${{ steps.release_type.outputs.type }}
+
+      - name: Create release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+        with:
+          tag_name: ${{ steps.calculate_version.outputs.new-version-tag }}
+          release_name: Release ${{ steps.calculate_version.outputs.new-version-tag }}
+          draft: false
+          prerelease: false
+
+
