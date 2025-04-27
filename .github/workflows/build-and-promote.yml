@@ -42,6 +42,8 @@ jobs:
   promote:
     name: Promote k8s manifests
     runs-on: ubuntu-24.04-arm
+    permissions:
+      contents: write
     #needs: build
 
     steps:
@@ -78,7 +80,7 @@ jobs:
         run: |
           git add ./*.yml
           git commit -m "Promote Kubernetes manifests for version ${{ github.event.release.tag_name }}"
-          git push https://github-actions:${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }} "deploy-pr-${{ github.event.release.tag_name }}"
+          git push origin "deploy-pr-${{ github.event.release.tag_name }}"
 
       - name: Create a PR for the manifiests
         run: |
