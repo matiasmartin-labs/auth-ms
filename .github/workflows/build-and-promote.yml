@@ -21,7 +21,7 @@ jobs:
           distribution: 'graalvm'
 
       - name: Docker login
-        run: echo "${{ secrets.GHCR_TOKEN }}" | docker login ghcr.io -u matiasmartin00 --password-stdin
+        run: echo "${{ secrets.GHCR_TOKEN }}" | docker login ghcr.io -u matiasmartin00 --password-stdin # change me for GITHUB_TOKEN
 
       - name: Cache Maven wrapper
         uses: actions/cache@v3
@@ -85,7 +85,7 @@ jobs:
 
       - name: Create a PR for the manifests
         env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }} # change me for GITHUB_TOKEN
         run: |
           gh pr create \
             --title "Promote Kubernetes Manifests for version ${{ github.event.release.tag_name }}" \
