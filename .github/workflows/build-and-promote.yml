@@ -90,6 +90,6 @@ jobs:
           gh pr create \
             --title "Promote Kubernetes Manifests for version ${{ github.event.release.tag_name }}" \
             --body "This PR adds Kubernetes manifests for version ${{ github.event.release.tag_name }}." \
-            --base main \
+            --base k8s-manifests \
             --head "deploy-pr-${{ github.event.release.tag_name }}" \
             --repo ${{ github.repository }}
