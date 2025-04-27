@@ -6,38 +6,38 @@ on:
       - created
 
 jobs:
-#  build:
-#    name: Build native and push image
-#    runs-on: ubuntu-24.04-arm
-#
-#    steps:
-#      - name: Checkout code
-#        uses: actions/checkout@v3
-#
-#      - name: Set up Java & GraalVM
-#        uses: graalvm/setup-graalvm@v1
-#        with:
-#          java-version: '21'
-#          distribution: 'graalvm'
-#
-#      - name: Docker login
-#        run: echo "${{ secrets.GHCR_TOKEN }}" | docker login ghcr.io -u matiasmartin00 --password-stdin
-#
-#      - name: Cache Maven wrapper
-#        uses: actions/cache@v3
-#        with:
-#          path: |
-#            ~/.m2/repository
-#            .mvn/wrapper
-#          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-#          restore-keys: |
-#            ${{ runner.os }}-maven-
-#
-#      - name: Build native image
-#        run: |
-#          RELEASE_TAG="${{ github.event.release.tag_name }}"
-#
-#          ./mvnw clean install -Pnative -DskipTests -Dquarkus.container-image.tag=$RELEASE_TAG
+  build:
+    name: Build native and push image
+    runs-on: ubuntu-24.04-arm
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Java & GraalVM
+        uses: graalvm/setup-graalvm@v1
+        with:
+          java-version: '21'
+          distribution: 'graalvm'
+
+      - name: Docker login
+        run: echo "${{ secrets.GHCR_TOKEN }}" | docker login ghcr.io -u matiasmartin00 --password-stdin
+
+      - name: Cache Maven wrapper
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.m2/repository
+            .mvn/wrapper
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+
+      - name: Build native image
+        run: |
+          RELEASE_TAG="${{ github.event.release.tag_name }}"
+
+          ./mvnw clean install -Pnative -DskipTests -Dquarkus.container-image.tag=$RELEASE_TAG
 
   promote:
     name: Promote k8s manifests
@@ -45,7 +45,7 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
-    #needs: build
+    needs: build
 
     steps:
       - name: Checkout code
