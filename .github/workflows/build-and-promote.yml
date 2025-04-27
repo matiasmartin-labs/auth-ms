@@ -70,11 +70,15 @@ jobs:
           
           git checkout -b "deploy-pr-${{ github.event.release.tag_name }}"
 
+      - name: Move manifests to root directory
+        run: |
+          mv ./k8s/manifests/* ./
+
       - name: Commit and Push manifests
         run: |
-          git add ./k8s/manifests/*
+          git add ./*.yml
           git commit -m "Promote Kubernetes manifests for version ${{ github.event.release.tag_name }}"
-          git push origin "deploy-pr-${{ github.event.release.tag_name }}"
+          git push https://github-actions:${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }} "deploy-pr-${{ github.event.release.tag_name }}"
 
       - name: Create a PR for the manifiests
         run: |
