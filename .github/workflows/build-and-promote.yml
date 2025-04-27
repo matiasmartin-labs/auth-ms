@@ -90,3 +90,5 @@ jobs:
             --base main \
             --head "deploy-pr-${{ github.event.release.tag_name }}" \
             --repo ${{ github.repository }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
