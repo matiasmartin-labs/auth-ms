@@ -94,10 +94,17 @@ jobs:
           docker-registry: ghcr.io/matiasmartin-labs
           image-pull-secret: ghcr-secret
 
+      - name: Git Config
+        run: |
+          git config --global user.name "Action"
+          git config --global user.email "action@github.com"
+
       - name: Checkout k8s-manifests branch
         run: |
           git fetch origin k8s-manifests
           git switch k8s-manifests
+          
+          git checkout -b "deploy-pr-${{ steps.resolve-tag.outputs.tag }}"
 
       - name: Move manifests to root directory
         run: |
