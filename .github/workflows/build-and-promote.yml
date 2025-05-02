@@ -104,11 +104,19 @@ jobs:
           mv ./k8s/manifests/* ./
           rm -r ./k8s
 
+      - name: Commit and Push manifests
+        run: |
+          git add ./*.yml
+          git commit -m "Promote Kubernetes manifests for version ${{ steps.resolve-tag.outputs.tag }}"
+          git push origin "deploy-pr-${{ steps.resolve-tag.outputs.tag }}"
+
       - name: Create a PR for the manifests
-        uses: peter-evans/create-pull-request@v7
-        with:
-          title: Promote Kubernetes Manifests for version ${{ github.event.release.tag_name }}
-          body: This PR adds Kubernetes manifests for version ${{ github.event.release.tag_name }}.
-          base: k8s-manifests
-          branch: deploy-pr-${{ github.event.release.tag_name }}
-          commit-message: Promote Kubernetes manifests for version ${{ github.event.release.tag_name }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr create \
+            --title "Promote Kubernetes Manifests for version ${{ steps.resolve-tag.outputs.tag }}" \
+            --body "This PR adds Kubernetes manifests for version ${{ steps.resolve-tag.outputs.tag }}." \
+            --base k8s-manifests \
+            --head "deploy-pr-${{ steps.resolve-tag.outputs.tag }}" \
+            --repo ${{ github.repository }}
