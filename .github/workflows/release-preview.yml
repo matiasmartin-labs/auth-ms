@@ -31,9 +31,9 @@ jobs:
         uses: matiasmartin-labs/gha-deployments/determine-release-type@main
         id: release_type
 
-      - name: Calculate next version
+      - name: Determine next version
         id: calculate_version
-        uses: matiasmartin-labs/gha-deployments/calculate-mvn-version@main
+        uses: matiasmartin-labs/gha-deployments/determine-next-version@main
         with:
           release-type: ${{ steps.release_type.outputs.type }}
 
