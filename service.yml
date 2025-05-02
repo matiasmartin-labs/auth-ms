@@ -6,7 +6,7 @@ metadata:
     k8s.renderer/commit: bc09c82448d5b0263a657864b2d88c079bd34d19
     k8s.renderer/branch: refs/heads/main
     k8s.renderer/vcs-url: matiasmartin-labs/auth-ms
-    k8s.renderer/render-time: 2025-05-02T21:38:59Z
+    k8s.renderer/render-time: 2025-05-02T21:50:03Z
   labels:
     app.kubernetes.io/name: auth-ms
     app.kubernetes.io/part-of: auth-system
