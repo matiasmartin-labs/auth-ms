@@ -10,6 +10,7 @@ on:
     types:
       - created
       - published
+      - released
 
 permissions:
   contents: write
@@ -48,9 +49,19 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
 
+      - name: Get release tag or dispatch input
+        id: resolve-tag
+        run: |
+          TAG="${{ github.event.release.tag_name }}"
+          if [ -z "$TAG" ]; then
+            TAG="${{ github.event.inputs.tag_name }}"
+          fi
+          echo "Resolved tag: $TAG"
+          echo "tag=$TAG" >> $GITHUB_OUTPUT
+
       - name: Build native image
         run: |
-          RELEASE_TAG="${{ github.event.release.tag_name || github.event.inputs.tag_name }}"
+          RELEASE_TAG="${{ steps.resolve-tag.outputs.tag }}"
 
           ./mvnw clean install -Pnative -DskipTests -Dquarkus.container-image.tag=$RELEASE_TAG
 
