@@ -3,6 +3,8 @@ app:
   port: 8080
   part-of: auth-system
   replicas: 1
+  metrics:
+    path: /q/metrics
   health-check:
     liveness:
       path: /q/health/live
@@ -13,10 +15,10 @@ app:
   resources:
     limits:
       memory: 30Mi
-      cpu: 15m
+      cpu: 250m
     requests:
       memory: 20Mi
-      cpu: 10m
+      cpu: 50m
 
 namespace: matiasmartin-labs
 
