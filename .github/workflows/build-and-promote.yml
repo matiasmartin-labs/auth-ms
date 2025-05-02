@@ -5,6 +5,11 @@ on:
     types:
       - created
 
+permissions:
+  contents: write
+  pull-requests: write
+  packages: write
+
 jobs:
   build:
     name: Build native and push image
@@ -20,8 +25,12 @@ jobs:
           java-version: '21'
           distribution: 'graalvm'
 
-      - name: Docker login
-        run: echo "${{ secrets.GHCR_TOKEN }}" | docker login ghcr.io -u matiasmartin00 --password-stdin # change me for GITHUB_TOKEN
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Cache Maven wrapper
         uses: actions/cache@v3
@@ -42,9 +51,6 @@ jobs:
   promote:
     name: Promote k8s manifests
     runs-on: ubuntu-24.04-arm
-    permissions:
-      contents: write
-      pull-requests: write
     needs: build
 
     steps:
@@ -77,19 +83,11 @@ jobs:
         run: |
           mv ./k8s/manifests/* ./
 
-      - name: Commit and Push manifests
-        run: |
-          git add ./*.yml
-          git commit -m "Promote Kubernetes manifests for version ${{ github.event.release.tag_name }}"
-          git push origin "deploy-pr-${{ github.event.release.tag_name }}"
-
       - name: Create a PR for the manifests
-        env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }} # change me for GITHUB_TOKEN
-        run: |
-          gh pr create \
-            --title "Promote Kubernetes Manifests for version ${{ github.event.release.tag_name }}" \
-            --body "This PR adds Kubernetes manifests for version ${{ github.event.release.tag_name }}." \
-            --base k8s-manifests \
-            --head "deploy-pr-${{ github.event.release.tag_name }}" \
-            --repo ${{ github.repository }}
+        uses: peter-evans/create-pull-request@v7
+        with:
+          title: Promote Kubernetes Manifests for version ${{ github.event.release.tag_name }}
+          body: This PR adds Kubernetes manifests for version ${{ github.event.release.tag_name }}.
+          base: k8s-manifests
+          branch: deploy-pr-${{ github.event.release.tag_name }}
+          commit-message: Promote Kubernetes manifests for version ${{ github.event.release.tag_name }}

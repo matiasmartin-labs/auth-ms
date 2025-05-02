@@ -7,6 +7,10 @@ on:
     branches:
       - main
 
+permissions:
+  contents: write
+  discussions: write
+
 jobs:
   create-release:
     if: |
@@ -32,13 +36,12 @@ jobs:
           release-type: ${{ steps.release_type.outputs.type }}
 
       - name: Create release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }} # change me for GITHUB_TOKEN
+        uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ steps.calculate_version.outputs.new-version-tag }}
-          release_name: Release ${{ steps.calculate_version.outputs.new-version-tag }}
+          name: Release ${{ steps.calculate_version.outputs.new-version-tag }}
           draft: false
           prerelease: false
+          generate_release_notes: true
 
 
