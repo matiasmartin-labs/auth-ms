@@ -1,6 +1,12 @@
 name: release-preview
 
 on:
+  workflow_dispatch:
+    inputs:
+      bump:
+        description: 'Bump type: major, minor or patch'
+        required: true
+        default: 'patch'
   pull_request:
     branches:
       - main
