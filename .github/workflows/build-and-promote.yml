@@ -67,21 +67,15 @@ jobs:
           docker-registry: ghcr.io/matiasmartin-labs
           image-pull-secret: ghcr-secret
 
-      - name: Git Config
-        run: |
-          git config --global user.name "Action"
-          git config --global user.email "action@github.com"
-
       - name: Checkout k8s-manifests branch
         run: |
           git fetch origin k8s-manifests
           git switch k8s-manifests
-          
-          git checkout -b "deploy-pr-${{ github.event.release.tag_name }}"
 
       - name: Move manifests to root directory
         run: |
           mv ./k8s/manifests/* ./
+          rm -r ./k8s
 
       - name: Create a PR for the manifests
         uses: peter-evans/create-pull-request@v7
