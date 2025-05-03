@@ -4,5 +4,5 @@ import com.mmartin.authms.domain.model.User;
 
 public interface SaveUserUseCase {
 
-    void save(User user);
+    void save(final User user);
 }

@@ -1,6 +1,7 @@
 package com.mmartin.authms.infrastructure.presentation.controller;
 
 import com.mmartin.authms.application.command.SingInCommand;
+import com.mmartin.authms.application.command.SingOutCommand;
 import com.mmartin.authms.cqrs.command.CommandBus;
 import com.mmartin.authms.application.command.SingUpCommand;
 import com.mmartin.authms.domain.model.Authorization;
@@ -8,11 +9,9 @@ import com.mmartin.authms.infrastructure.presentation.dto.SignInRequest;
 import com.mmartin.authms.infrastructure.presentation.dto.SignInResponse;
 import com.mmartin.authms.infrastructure.presentation.dto.SignUpRequest;
 import com.mmartin.authms.infrastructure.presentation.mapper.ApiMapper;
+import io.quarkus.security.Authenticated;
 import io.smallrye.common.annotation.Blocking;
-import jakarta.ws.rs.Consumes;
-import jakarta.ws.rs.POST;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import lombok.RequiredArgsConstructor;
@@ -30,9 +29,11 @@ class AuthController {
 
     @POST
     @Path("/sign-up")
-    public Void register(SignUpRequest request) {
+    public Response register(SignUpRequest request) {
         final SingUpCommand command = apiMapper.map(request);
-        return commandBus.send(command);
+        commandBus.send(command);
+        return Response.status(Response.Status.CREATED)
+                .build();
     }
 
     @POST
@@ -42,5 +43,14 @@ class AuthController {
         final Authorization authorization = commandBus.send(command);
         return Response.ok(new SignInResponse(command.username(), authorization.token()))
                 .build();
+    }
+
+    @POST
+    @Path("/sign-out")
+    @Authenticated
+    public Response logout(@HeaderParam("Authorization") String authorization) {
+        final SingOutCommand command = new SingOutCommand(authorization);
+        commandBus.send(command);
+        return Response.noContent().build();
     }
 }

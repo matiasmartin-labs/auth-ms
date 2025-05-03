@@ -7,4 +7,5 @@ public class InvalidCredentialsException extends DomainException {
     public InvalidCredentialsException() {
         super(MESSAGE);
     }
+
 }

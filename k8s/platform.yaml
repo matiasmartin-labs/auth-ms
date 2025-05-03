@@ -38,3 +38,4 @@ secret-volumes:
 env:
   secrets:
     - psql-credentials
+    - redis-credentials
