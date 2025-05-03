@@ -9,6 +9,8 @@ public interface TokenProvider {
 
     void revoke(final Authorization authorization);
 
+    void validate(final Authorization authorization);
+
     static TokenProvider instance() {
         if (InstanceHolder.INSTANCE == null) {
             throw new IllegalStateException("TokenProvider not initialized");

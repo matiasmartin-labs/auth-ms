@@ -4,6 +4,7 @@ import com.mmartin.authms.domain.repository.RevokeTokenRepository;
 import io.quarkus.redis.datasource.RedisDataSource;
 import io.quarkus.redis.datasource.value.ValueCommands;
 import jakarta.enterprise.context.ApplicationScoped;
+import org.apache.commons.lang3.StringUtils;
 
 @ApplicationScoped
 class TokenRepositoryImpl implements RevokeTokenRepository {
@@ -17,7 +18,13 @@ class TokenRepositoryImpl implements RevokeTokenRepository {
     @Override
     public void revoke(final String jti, final Long expirationTime) {
         final long ttl = expirationTime - (System.currentTimeMillis() / 1000);
-        valueCommands.setex(jti, ttl, "revoke");
+        this.valueCommands.setex(jti, ttl, "revoke");
+    }
+
+    @Override
+    public boolean isRevoked(String jti) {
+        final String value = this.valueCommands.get(jti);
+        return StringUtils.isNoneBlank(value);
     }
 
 }

@@ -14,6 +14,6 @@ class ExistsUserUseCaseImpl implements ExistsUserUseCase {
 
     @Override
     public boolean exists(final Username username) {
-        return existsUserRepository.exists(username);
+        return this.existsUserRepository.exists(username);
     }
 }
