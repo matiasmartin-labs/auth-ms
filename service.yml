@@ -3,14 +3,14 @@ kind: Service
 metadata:
   annotations:
     k8s.renderer/template-version: 1.0.0
-    k8s.renderer/commit: e3238f78c22cadc40ec063874002e4ff272e078f
-    k8s.renderer/branch: refs/tags/v2.3.1
+    k8s.renderer/commit: b1767996be282a1cc3d82df0fc9b1b491996e705
+    k8s.renderer/branch: refs/tags/v2.4.0
     k8s.renderer/vcs-url: matiasmartin-labs/auth-ms
-    k8s.renderer/render-time: 2025-05-03T13:51:20Z
+    k8s.renderer/render-time: 2025-05-03T19:51:46Z
   labels:
     app.kubernetes.io/name: auth-ms
     app.kubernetes.io/part-of: auth-system
-    app.kubernetes.io/version: v2.3.1
+    app.kubernetes.io/version: v2.4.0
     app.kubernetes.io/managed-by: k8s.renderer
   name: auth-ms
   namespace: matiasmartin-labs
@@ -24,4 +24,4 @@ spec:
   selector:
     app.kubernetes.io/name: auth-ms
     app.kubernetes.io/part-of: auth-system
-    app.kubernetes.io/version:  v2.3.1
+    app.kubernetes.io/version:  v2.4.0
