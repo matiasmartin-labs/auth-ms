@@ -2,6 +2,7 @@ package com.mmartin.authms.infrastructure.presentation.controller;
 
 import com.mmartin.authms.application.command.SingInCommand;
 import com.mmartin.authms.application.command.SingOutCommand;
+import com.mmartin.authms.application.command.ValidateTokenCommand;
 import com.mmartin.authms.cqrs.command.CommandBus;
 import com.mmartin.authms.application.command.SingUpCommand;
 import com.mmartin.authms.domain.model.Authorization;
@@ -50,6 +51,15 @@ class AuthController {
     @Authenticated
     public Response logout(@HeaderParam("Authorization") String authorization) {
         final SingOutCommand command = new SingOutCommand(authorization);
+        commandBus.send(command);
+        return Response.noContent().build();
+    }
+
+    @POST
+    @Path("/token/validate")
+    @Authenticated
+    public Response validate(@HeaderParam("Authorization") String authorization) {
+        final ValidateTokenCommand command = new ValidateTokenCommand(authorization);
         commandBus.send(command);
         return Response.noContent().build();
     }

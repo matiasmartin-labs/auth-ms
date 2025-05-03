@@ -48,9 +48,28 @@ class JwtTokenProvider implements TokenProvider {
     @Override
     public void revoke(Authorization authorization) {
         try {
-            final JsonWebToken jwt = jwtParser.parse(authorization.token());
+            final JsonWebToken jwt = this.jwtParser.parse(authorization.token());
             Optional<String> jtiOpt =  jwt.claim(JTI_CLAIM);
-            jtiOpt.ifPresent(jti -> revokeTokenRepository.revoke(jti, jwt.getExpirationTime()));
+            jtiOpt.ifPresent(jti -> this.revokeTokenRepository.revoke(jti, jwt.getExpirationTime()));
+        } catch (ParseException e) {
+            throw new InvalidCredentialsException();
+        }
+    }
+
+    @Override
+    public void validate(Authorization authorization) {
+        try {
+            final JsonWebToken jwt = this.jwtParser.parse(authorization.token());
+            Optional<String> jtiOpt =  jwt.claim(JTI_CLAIM);
+            if (jtiOpt.isEmpty()) {
+                throw new InvalidCredentialsException();
+            }
+
+            final String jti = jtiOpt.get();
+            if (this.revokeTokenRepository.isRevoked(jti)) {
+                throw new InvalidCredentialsException();
+            }
+
         } catch (ParseException e) {
             throw new InvalidCredentialsException();
         }
