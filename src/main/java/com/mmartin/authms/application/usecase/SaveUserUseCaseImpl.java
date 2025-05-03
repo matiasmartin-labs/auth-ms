@@ -13,7 +13,7 @@ class SaveUserUseCaseImpl implements SaveUserUseCase {
     private final SaveUserRepository saveUserRepository;
 
     @Override
-    public void save(User user) {
+    public void save(final User user) {
         saveUserRepository.save(user);
     }
 }

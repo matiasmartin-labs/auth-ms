@@ -1,11 +1,13 @@
 package com.mmartin.authms.domain.provider;
 
+import com.mmartin.authms.domain.model.Authorization;
 import com.mmartin.authms.domain.model.User;
-import com.mmartin.authms.domain.model.vo.Username;
 
 public interface TokenProvider {
 
-    String generate(User user);
+    String generate(final User user);
+
+    void revoke(final Authorization authorization);
 
     static TokenProvider instance() {
         if (InstanceHolder.INSTANCE == null) {
@@ -15,7 +17,7 @@ public interface TokenProvider {
         return InstanceHolder.INSTANCE;
     }
 
-    static void configure(TokenProvider tokenProvider) {
+    static void configure(final TokenProvider tokenProvider) {
         InstanceHolder.INSTANCE = tokenProvider;
     }
 
