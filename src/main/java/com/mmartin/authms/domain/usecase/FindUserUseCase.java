@@ -7,5 +7,5 @@ import java.util.Optional;
 
 public interface FindUserUseCase {
 
-    Optional<User> findUser(Username username);
+    Optional<User> findUser(final Username username);
 }

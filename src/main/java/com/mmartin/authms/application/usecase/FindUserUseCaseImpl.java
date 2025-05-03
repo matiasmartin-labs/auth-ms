@@ -16,7 +16,7 @@ class FindUserUseCaseImpl implements FindUserUseCase {
     private final FindUserRepository findUserRepository;
 
     @Override
-    public Optional<User> findUser(Username username) {
+    public Optional<User> findUser(final Username username) {
         return findUserRepository.findUser(username);
     }
 }
