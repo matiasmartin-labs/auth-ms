@@ -62,6 +62,10 @@ jobs:
           RELEASE_TAG="${{ steps.resolve-tag.outputs.tag }}"
 
           ./mvnw clean install -Pnative -DskipTests -Dquarkus.container-image.tag=$RELEASE_TAG
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MAVEN_USERNAME: ${{ github.actor }}
+          MAVEN_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
 
   promote:
     name: Promote k8s manifests
