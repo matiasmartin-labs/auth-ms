@@ -1,9 +1,8 @@
-package com.mmartin.authms.infrastructure.presentation.provider;
+package com.mmartin.authms.interfaces.web.provider;
 
-import com.mmartin.authms.infrastructure.presentation.dto.ErrorResponse;
+import com.mmartin.authms.interfaces.web.dto.ErrorResponse;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.ext.ExceptionMapper;
-import jakarta.ws.rs.ext.Provider;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor

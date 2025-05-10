@@ -1,9 +1,9 @@
-package com.mmartin.authms.infrastructure.presentation.mapper;
+package com.mmartin.authms.interfaces.web.mapper;
 
 import com.mmartin.authms.application.command.SingInCommand;
 import com.mmartin.authms.application.command.SingUpCommand;
-import com.mmartin.authms.infrastructure.presentation.dto.SignInRequest;
-import com.mmartin.authms.infrastructure.presentation.dto.SignUpRequest;
+import com.mmartin.authms.interfaces.web.dto.SignInRequest;
+import com.mmartin.authms.interfaces.web.dto.SignUpRequest;
 import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped

@@ -1,12 +1,12 @@
 package com.mmartin.authms.application.command;
 
-import com.mmartin.authms.cqrs.command.CommandHandler;
 import com.mmartin.authms.domain.exception.InvalidCredentialsException;
 import com.mmartin.authms.domain.model.Authorization;
 import com.mmartin.authms.domain.model.User;
 import com.mmartin.authms.domain.model.vo.Password;
 import com.mmartin.authms.domain.model.vo.Username;
 import com.mmartin.authms.domain.usecase.FindUserUseCase;
+import com.mmartin.cqrs.command.CommandHandler;
 import jakarta.enterprise.context.ApplicationScoped;
 import lombok.RequiredArgsConstructor;
 

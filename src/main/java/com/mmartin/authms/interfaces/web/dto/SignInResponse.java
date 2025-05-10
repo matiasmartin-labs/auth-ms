@@ -1,4 +1,4 @@
-package com.mmartin.authms.infrastructure.presentation.dto;
+package com.mmartin.authms.interfaces.web.dto;
 
 import io.quarkus.runtime.annotations.RegisterForReflection;
 

@@ -1,9 +1,7 @@
-package com.mmartin.authms.infrastructure.presentation.provider;
+package com.mmartin.authms.interfaces.web.provider;
 
 import com.mmartin.authms.domain.exception.InvalidCredentialsException;
-import com.mmartin.authms.infrastructure.presentation.dto.ErrorResponse;
 import jakarta.ws.rs.core.Response;
-import jakarta.ws.rs.ext.ExceptionMapper;
 import jakarta.ws.rs.ext.Provider;
 
 @Provider
