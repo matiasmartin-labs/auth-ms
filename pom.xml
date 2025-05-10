@@ -29,6 +29,21 @@
         </dependencies>
     </dependencyManagement>
 
+
+    <repositories>
+
+        <repository>
+            <id>central</id>
+            <url>https://repo.maven.apache.org/maven2</url>
+        </repository>
+
+        <repository>
+            <id>github</id>
+            <url>https://maven.pkg.github.com/matiasmartin-labs/*</url>
+        </repository>
+
+    </repositories>
+
     <dependencies>
         <dependency>
             <groupId>io.quarkus</groupId>
@@ -111,6 +126,16 @@
         <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-redis-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.mmartin</groupId>
+            <artifactId>cqrs-core</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.mmartin</groupId>
+            <artifactId>cqrs-quarkus</artifactId>
+            <version>1.0.0</version>
         </dependency>
     </dependencies>
 

@@ -1,11 +1,11 @@
 package com.mmartin.authms.application.command;
 
-import com.mmartin.authms.cqrs.command.CommandHandler;
 import com.mmartin.authms.domain.exception.AlreadyExistsUsernameException;
 import com.mmartin.authms.domain.model.User;
 import com.mmartin.authms.domain.model.vo.Username;
 import com.mmartin.authms.domain.usecase.ExistsUserUseCase;
 import com.mmartin.authms.domain.usecase.SaveUserUseCase;
+import com.mmartin.cqrs.command.CommandHandler;
 import jakarta.enterprise.context.ApplicationScoped;
 import lombok.RequiredArgsConstructor;
 

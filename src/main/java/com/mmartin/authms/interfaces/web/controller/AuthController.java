@@ -1,15 +1,15 @@
-package com.mmartin.authms.infrastructure.presentation.controller;
+package com.mmartin.authms.interfaces.web.controller;
 
 import com.mmartin.authms.application.command.SingInCommand;
 import com.mmartin.authms.application.command.SingOutCommand;
 import com.mmartin.authms.application.command.ValidateTokenCommand;
-import com.mmartin.authms.cqrs.command.CommandBus;
 import com.mmartin.authms.application.command.SingUpCommand;
 import com.mmartin.authms.domain.model.Authorization;
-import com.mmartin.authms.infrastructure.presentation.dto.SignInRequest;
-import com.mmartin.authms.infrastructure.presentation.dto.SignInResponse;
-import com.mmartin.authms.infrastructure.presentation.dto.SignUpRequest;
-import com.mmartin.authms.infrastructure.presentation.mapper.ApiMapper;
+import com.mmartin.authms.interfaces.web.dto.SignInRequest;
+import com.mmartin.authms.interfaces.web.dto.SignInResponse;
+import com.mmartin.authms.interfaces.web.dto.SignUpRequest;
+import com.mmartin.authms.interfaces.web.mapper.ApiMapper;
+import com.mmartin.cqrs.command.CommandBus;
 import io.quarkus.security.Authenticated;
 import io.smallrye.common.annotation.Blocking;
 import jakarta.ws.rs.*;

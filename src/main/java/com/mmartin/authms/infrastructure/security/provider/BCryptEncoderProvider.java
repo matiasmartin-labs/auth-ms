@@ -1,4 +1,4 @@
-package com.mmartin.authms.infrastructure.provider;
+package com.mmartin.authms.infrastructure.security.provider;
 
 import com.mmartin.authms.domain.model.vo.Password;
 import com.mmartin.authms.domain.provider.PasswordEncoderProvider;

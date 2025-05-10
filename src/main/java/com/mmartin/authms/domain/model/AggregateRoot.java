@@ -1,6 +1,6 @@
 package com.mmartin.authms.domain.model;
 
-import com.mmartin.authms.cqrs.event.DomainEvent;
+import com.mmartin.cqrs.event.DomainEvent;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
