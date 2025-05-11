@@ -12,18 +12,20 @@ public interface TokenProvider {
     void validate(final Authorization authorization);
 
     static TokenProvider instance() {
-        if (InstanceHolder.INSTANCE == null) {
+        if (InstanceHolder.instance == null) {
             throw new IllegalStateException("TokenProvider not initialized");
         }
 
-        return InstanceHolder.INSTANCE;
+        return InstanceHolder.instance;
     }
 
     static void configure(final TokenProvider tokenProvider) {
-        InstanceHolder.INSTANCE = tokenProvider;
+        InstanceHolder.instance = tokenProvider;
     }
 
     class InstanceHolder {
-        private static TokenProvider INSTANCE;
+        private static TokenProvider instance;
+
+        private InstanceHolder() {}
     }
 }

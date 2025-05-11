@@ -1,8 +1,6 @@
 package com.mmartin.authms.infrastructure.persistence;
 
-import com.mmartin.authms.domain.model.User;
 import com.mmartin.authms.infrastructure.persistence.entity.UserEntity;
-import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import io.quarkus.hibernate.orm.panache.PanacheRepositoryBase;
 import jakarta.enterprise.context.ApplicationScoped;
 

@@ -9,18 +9,20 @@ public interface PasswordEncoderProvider {
     Boolean check(Password raw, Password encoded);
 
     static PasswordEncoderProvider instance() {
-        if (PasswordEncoderProvider.InstanceHolder.INSTANCE == null) {
+        if (PasswordEncoderProvider.InstanceHolder.instance == null) {
             throw new IllegalStateException("PasswordEncoderProvider not initialized");
         }
 
-        return PasswordEncoderProvider.InstanceHolder.INSTANCE;
+        return PasswordEncoderProvider.InstanceHolder.instance;
     }
 
     static void configure(PasswordEncoderProvider passwordEncoderProvider) {
-        PasswordEncoderProvider.InstanceHolder.INSTANCE = passwordEncoderProvider;
+        PasswordEncoderProvider.InstanceHolder.instance = passwordEncoderProvider;
     }
 
     class InstanceHolder {
-        private static PasswordEncoderProvider INSTANCE;
+        private static PasswordEncoderProvider instance;
+
+        private InstanceHolder() {}
     }
 }
