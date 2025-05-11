@@ -6,6 +6,6 @@ import lombok.Builder;
 
 @Builder
 @Command("sing-out-command")
-public record SingOutCommand(
+public record SignOutCommand(
         String token
 ) implements CommandRequest<Void> { }

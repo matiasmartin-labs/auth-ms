@@ -1,12 +1,13 @@
 package com.mmartin.authms.application.command;
 
+import com.mmartin.authms.domain.model.Authorization;
 import com.mmartin.cqrs.command.Command;
 import com.mmartin.cqrs.command.CommandRequest;
 import lombok.Builder;
 
 @Builder
-@Command("sing-up-command")
-public record SingUpCommand(
+@Command("sing-in-command")
+public record SignInCommand(
         String username,
         String password
-) implements CommandRequest<Void> { }
+) implements CommandRequest<Authorization> { }

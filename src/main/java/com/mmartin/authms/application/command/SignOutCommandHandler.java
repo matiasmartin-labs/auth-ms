@@ -8,12 +8,12 @@ import lombok.RequiredArgsConstructor;
 
 @ApplicationScoped
 @RequiredArgsConstructor
-class SingOutCommandHandler implements CommandHandler<SingOutCommand, Void> {
+class SignOutCommandHandler implements CommandHandler<SignOutCommand, Void> {
 
     private final LogoutUseCase logoutUseCase;
 
     @Override
-    public Void execute(SingOutCommand command) {
+    public Void execute(SignOutCommand command) {
         final Authorization authorization = new Authorization(command.token());
         logoutUseCase.logout(authorization);
         return null;

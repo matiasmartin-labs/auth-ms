@@ -1,6 +1,6 @@
 package com.mmartin.authms.domain.model;
 
-import com.mmartin.authms.application.command.SingUpCommand;
+import com.mmartin.authms.application.command.SignUpCommand;
 import com.mmartin.authms.domain.event.UserRegistered;
 import com.mmartin.authms.domain.exception.InvalidCredentialsException;
 import com.mmartin.authms.domain.model.vo.EncodedPassword;
@@ -8,15 +8,9 @@ import com.mmartin.authms.domain.model.vo.Password;
 import com.mmartin.authms.domain.model.vo.Username;
 import com.mmartin.authms.domain.provider.PasswordEncoderProvider;
 import com.mmartin.authms.domain.provider.TokenProvider;
-import io.smallrye.jwt.build.Jwt;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Value;
-import org.mindrot.jbcrypt.BCrypt;
-
-import java.time.Instant;
-import java.time.temporal.ChronoUnit;
-import java.util.Set;
 
 @Value
 @EqualsAndHashCode(callSuper = true)
@@ -30,7 +24,7 @@ public class User extends AggregateRoot<Username> {
         this.password = password;
     }
 
-    public static User signUp(final SingUpCommand command) {
+    public static User signUp(final SignUpCommand command) {
         final Username username = new Username(command.username());
         final Password password = new EncodedPassword(command.password());
         final User user = User.builder()
