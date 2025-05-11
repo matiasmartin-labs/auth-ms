@@ -12,9 +12,9 @@ import java.util.List;
 @Getter
 @EqualsAndHashCode
 @RequiredArgsConstructor
-class AggregateRoot<ID> {
+class AggregateRoot<T> {
 
-    protected final ID id;
+    protected final T id;
 
     private final List<DomainEvent> domainEvents = new ArrayList<>();
 

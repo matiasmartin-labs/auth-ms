@@ -10,9 +10,10 @@ public record Authorization(
         if (StringUtils.isBlank(token)) {
             throw new IllegalArgumentException("token can't be empty");
         }
-        String BEARER_PREFIX = "Bearer ";
-        if (token.startsWith(BEARER_PREFIX)) {
-            token = token.substring(BEARER_PREFIX.length()).trim();
+
+        String bearerPrefix = "Bearer ";
+        if (token.startsWith(bearerPrefix)) {
+            token = token.substring(bearerPrefix.length()).trim();
         }
     }
 }
