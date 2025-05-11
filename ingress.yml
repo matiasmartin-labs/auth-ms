@@ -3,14 +3,14 @@ kind: Ingress
 metadata:
   annotations:
     k8s.renderer/template-version: 1.0.0
-    k8s.renderer/commit: d99e0a6e48dbc3b1a333b3bda0a9c274f6a6513e
-    k8s.renderer/branch: refs/tags/v2.5.0
+    k8s.renderer/commit: 2d6bef63c799f10a105eb927d02e578bffd36e1b
+    k8s.renderer/branch: refs/heads/main
     k8s.renderer/vcs-url: matiasmartin-labs/auth-ms
-    k8s.renderer/render-time: 2025-05-03T20:08:01Z
+    k8s.renderer/render-time: 2025-05-11T12:50:27Z
   labels:
     app.kubernetes.io/name: auth-ms
     app.kubernetes.io/part-of: auth-system
-    app.kubernetes.io/version: v2.5.0
+    app.kubernetes.io/version: v2.5.2
     app.kubernetes.io/managed-by: k8s.renderer
   name: auth-ms
   namespace: matiasmartin-labs
