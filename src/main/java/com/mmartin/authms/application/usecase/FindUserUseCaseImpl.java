@@ -18,7 +18,7 @@ class FindUserUseCaseImpl implements FindUserUseCase {
     private final FindUserRepository findUserRepository;
 
     @Override
-    public Optional<User> findUser(@NotNull final Username username) {
+    public Optional<User> findUser(final Username username) {
         if (Objects.isNull(username)) {
             throw new IllegalArgumentException("username can't be null");
         }

@@ -16,7 +16,7 @@ class SaveUserUseCaseImpl implements SaveUserUseCase {
     private final SaveUserRepository saveUserRepository;
 
     @Override
-    public void save(@NotNull final User user) {
+    public void save(final User user) {
         if (Objects.isNull(user)) {
             throw new IllegalArgumentException("user can't be null");
         }

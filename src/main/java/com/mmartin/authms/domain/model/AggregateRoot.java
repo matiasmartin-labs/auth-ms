@@ -1,6 +1,7 @@
 package com.mmartin.authms.domain.model;
 
 import com.mmartin.cqrs.event.DomainEvent;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
@@ -9,6 +10,7 @@ import java.util.Collections;
 import java.util.List;
 
 @Getter
+@EqualsAndHashCode
 @RequiredArgsConstructor
 class AggregateRoot<ID> {
 

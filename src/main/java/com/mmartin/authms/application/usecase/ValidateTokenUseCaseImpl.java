@@ -16,7 +16,7 @@ class ValidateTokenUseCaseImpl implements ValidateTokenUseCase {
     private final TokenProvider tokenProvider;
 
     @Override
-    public void validate(@NotNull Authorization authorization) {
+    public void validate(Authorization authorization) {
         if (Objects.isNull(authorization)) {
             throw new IllegalArgumentException("authorization can't be null");
         }

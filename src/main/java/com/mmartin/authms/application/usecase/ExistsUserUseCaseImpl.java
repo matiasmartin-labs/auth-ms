@@ -16,7 +16,7 @@ class ExistsUserUseCaseImpl implements ExistsUserUseCase {
     private final ExistsUserRepository existsUserRepository;
 
     @Override
-    public boolean exists(@NotNull final Username username) {
+    public boolean exists(final Username username) {
         if (Objects.isNull(username)) {
             throw new IllegalArgumentException("username can't be null");
         }

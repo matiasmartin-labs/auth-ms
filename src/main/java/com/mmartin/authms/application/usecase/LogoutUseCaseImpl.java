@@ -16,7 +16,7 @@ class LogoutUseCaseImpl implements LogoutUseCase {
     private final TokenProvider tokenProvider;
 
     @Override
-    public void logout(@NotNull Authorization authorization) {
+    public void logout(Authorization authorization) {
         if (Objects.isNull(authorization)) {
             throw new IllegalArgumentException("authorization can't be null");
         }
