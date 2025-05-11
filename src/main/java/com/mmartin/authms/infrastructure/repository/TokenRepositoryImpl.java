@@ -18,7 +18,7 @@ class TokenRepositoryImpl implements RevokeTokenRepository {
     @Override
     public void revoke(final String jti, final Long expirationTime) {
         final long ttl = expirationTime - (System.currentTimeMillis() / 1000);
-        this.valueCommands.setex(jti, ttl, "revoke");
+        this.valueCommands.setex(jti, ttl, "revoked");
     }
 
     @Override

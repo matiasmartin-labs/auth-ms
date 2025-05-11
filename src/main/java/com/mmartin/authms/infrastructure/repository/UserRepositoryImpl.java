@@ -23,17 +23,17 @@ class UserRepositoryImpl implements SaveUserRepository, ExistsUserRepository, Fi
     @Override
     public void save(User user) {
         final UserEntity entity = userMapper.mapToEntity(user);
-        userRepository.persist(entity);
+        this.userRepository.persist(entity);
     }
 
     @Override
     public boolean exists(Username username) {
-        return userRepository.existsByUsername(username.value());
+        return this.userRepository.existsByUsername(username.value());
     }
 
     @Override
     public Optional<User> findUser(Username username) {
-        return userRepository.findByUsername(username.value())
+        return this.userRepository.findByUsername(username.value())
                 .map(this.userMapper::mapToModel);
     }
 }
