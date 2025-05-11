@@ -1,6 +1,5 @@
 package com.mmartin.authms.interfaces.web.provider;
 
-import com.mmartin.authms.domain.exception.InvalidCredentialsException;
 import com.mmartin.authms.interfaces.web.dto.ErrorResponse;
 import jakarta.ws.rs.core.Response;
 import org.junit.jupiter.api.Test;

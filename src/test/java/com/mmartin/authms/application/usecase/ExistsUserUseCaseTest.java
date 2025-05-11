@@ -2,7 +2,6 @@ package com.mmartin.authms.application.usecase;
 
 import com.mmartin.authms.domain.model.vo.Username;
 import com.mmartin.authms.domain.repository.ExistsUserRepository;
-import com.mmartin.authms.domain.usecase.ExistsUserUseCase;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

@@ -5,7 +5,6 @@ import com.mmartin.authms.domain.model.vo.Username;
 import com.mmartin.authms.domain.repository.FindUserRepository;
 import com.mmartin.authms.domain.usecase.FindUserUseCase;
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Objects;

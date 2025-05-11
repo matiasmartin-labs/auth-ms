@@ -4,7 +4,6 @@ import com.mmartin.authms.domain.model.Authorization;
 import com.mmartin.authms.domain.provider.TokenProvider;
 import com.mmartin.authms.domain.usecase.LogoutUseCase;
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Objects;

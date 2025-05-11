@@ -5,7 +5,6 @@ import com.mmartin.authms.domain.model.User;
 import com.mmartin.authms.domain.model.vo.Username;
 import com.mmartin.authms.domain.usecase.ExistsUserUseCase;
 import com.mmartin.authms.domain.usecase.SaveUserUseCase;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

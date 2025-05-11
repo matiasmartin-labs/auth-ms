@@ -1,9 +1,7 @@
 package com.mmartin.authms.application.usecase;
 
 import com.mmartin.authms.domain.model.Authorization;
-import com.mmartin.authms.domain.model.User;
 import com.mmartin.authms.domain.provider.TokenProvider;
-import com.mmartin.authms.domain.repository.SaveUserRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

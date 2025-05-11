@@ -2,7 +2,6 @@ package com.mmartin.authms.domain.model.vo;
 
 import com.mmartin.authms.domain.exception.PasswordEmptyException;
 import lombok.EqualsAndHashCode;
-import lombok.ToString;
 import org.apache.commons.lang3.StringUtils;
 
 @EqualsAndHashCode
