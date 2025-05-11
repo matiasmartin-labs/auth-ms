@@ -57,6 +57,21 @@ jobs:
           echo "Resolved tag: $TAG"
           echo "tag=$TAG" >> $GITHUB_OUTPUT
 
+      - name: Generate settings.xml for GitHub Packages
+        run: |
+          mkdir -p ~/.m2
+          cat > ~/.m2/settings.xml <<EOF
+          <settings>
+            <servers>
+              <server>
+                <id>github</id>
+                <username>${{ github.actor }}</username>
+                <password>${{ secrets.GITHUB_TOKEN }}</password>
+              </server>
+            </servers>
+          </settings>
+          EOF
+
       - name: Build native image
         run: |
           RELEASE_TAG="${{ steps.resolve-tag.outputs.tag }}"
