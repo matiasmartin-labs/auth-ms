@@ -76,7 +76,7 @@ jobs:
         run: |
           RELEASE_TAG="${{ steps.resolve-tag.outputs.tag }}"
 
-          ./mvnw clean install -Pnative -DskipTests -Dquarkus.container-image.tag=$RELEASE_TAG
+          ./mvnw clean install -Pnative -DskipTests -Dquarkus.native.container-build=true -Dquarkus.container-image.build=true -Dquarkus.container-image.push=true -Dquarkus.container-image.tag=$RELEASE_TAG
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           MAVEN_USERNAME: ${{ github.actor }}
