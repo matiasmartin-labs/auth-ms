@@ -235,6 +235,14 @@
                         <goals>
                             <goal>report</goal>
                         </goals>
+                        <configuration>
+                            <excludes>
+                                <exclude>com/mmartin/authms/config/**</exclude>
+                                <exclude>com/mmartin/authms/**/dto/**</exclude>
+                                <exclude>com/mmartin/authms/**/vo/**</exclude>
+                                <exclude>**/*Exception.class</exclude>
+                            </excludes>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
