@@ -6,6 +6,8 @@ import com.mmartin.authms.domain.usecase.ExistsUserUseCase;
 import jakarta.enterprise.context.ApplicationScoped;
 import lombok.RequiredArgsConstructor;
 
+import java.util.Objects;
+
 @ApplicationScoped
 @RequiredArgsConstructor
 class ExistsUserUseCaseImpl implements ExistsUserUseCase {
@@ -14,6 +16,9 @@ class ExistsUserUseCaseImpl implements ExistsUserUseCase {
 
     @Override
     public boolean exists(final Username username) {
+        if (Objects.isNull(username)) {
+            throw new IllegalArgumentException("username can't be null");
+        }
         return this.existsUserRepository.exists(username);
     }
 }

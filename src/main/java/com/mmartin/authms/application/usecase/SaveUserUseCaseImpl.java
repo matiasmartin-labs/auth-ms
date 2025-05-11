@@ -6,6 +6,8 @@ import com.mmartin.authms.domain.usecase.SaveUserUseCase;
 import jakarta.enterprise.context.ApplicationScoped;
 import lombok.RequiredArgsConstructor;
 
+import java.util.Objects;
+
 @ApplicationScoped
 @RequiredArgsConstructor
 class SaveUserUseCaseImpl implements SaveUserUseCase {
@@ -14,6 +16,9 @@ class SaveUserUseCaseImpl implements SaveUserUseCase {
 
     @Override
     public void save(final User user) {
+        if (Objects.isNull(user)) {
+            throw new IllegalArgumentException("user can't be null");
+        }
         this.saveUserRepository.save(user);
     }
 }

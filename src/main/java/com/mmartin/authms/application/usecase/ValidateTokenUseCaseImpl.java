@@ -6,6 +6,8 @@ import com.mmartin.authms.domain.usecase.ValidateTokenUseCase;
 import jakarta.enterprise.context.ApplicationScoped;
 import lombok.RequiredArgsConstructor;
 
+import java.util.Objects;
+
 @ApplicationScoped
 @RequiredArgsConstructor
 class ValidateTokenUseCaseImpl implements ValidateTokenUseCase {
@@ -14,6 +16,9 @@ class ValidateTokenUseCaseImpl implements ValidateTokenUseCase {
 
     @Override
     public void validate(Authorization authorization) {
+        if (Objects.isNull(authorization)) {
+            throw new IllegalArgumentException("authorization can't be null");
+        }
         this.tokenProvider.validate(authorization);
     }
 }

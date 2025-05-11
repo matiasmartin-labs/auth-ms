@@ -6,6 +6,8 @@ import com.mmartin.authms.domain.usecase.LogoutUseCase;
 import jakarta.enterprise.context.ApplicationScoped;
 import lombok.RequiredArgsConstructor;
 
+import java.util.Objects;
+
 @ApplicationScoped
 @RequiredArgsConstructor
 class LogoutUseCaseImpl implements LogoutUseCase {
@@ -14,6 +16,9 @@ class LogoutUseCaseImpl implements LogoutUseCase {
 
     @Override
     public void logout(Authorization authorization) {
+        if (Objects.isNull(authorization)) {
+            throw new IllegalArgumentException("authorization can't be null");
+        }
         this.tokenProvider.revoke(authorization);
     }
 }

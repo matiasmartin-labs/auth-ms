@@ -14,12 +14,12 @@ import java.util.Optional;
 
 @ApplicationScoped
 @RequiredArgsConstructor
-class SingInCommandHandler implements CommandHandler<SingInCommand, Authorization> {
+class SignInCommandHandler implements CommandHandler<SignInCommand, Authorization> {
 
     private final FindUserUseCase findUserUseCase;
 
     @Override
-    public Authorization execute(SingInCommand command) {
+    public Authorization execute(SignInCommand command) {
         final Optional<User> userOpt = findUserUseCase.findUser(new Username(command.username()));
 
         if (userOpt.isEmpty()) {

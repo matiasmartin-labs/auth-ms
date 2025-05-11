@@ -11,13 +11,13 @@ import lombok.RequiredArgsConstructor;
 
 @ApplicationScoped
 @RequiredArgsConstructor
-class SingUpCommandHandler implements CommandHandler<SingUpCommand, Void> {
+class SignUpCommandHandler implements CommandHandler<SignUpCommand, Void> {
 
     private final ExistsUserUseCase existsUserUseCase;
     private final SaveUserUseCase saveUserUseCase;
 
     @Override
-    public Void execute(SingUpCommand command) {
+    public Void execute(SignUpCommand command) {
         final boolean exists = existsUserUseCase.exists(new Username(command.username()));
         if (exists) {
             throw new AlreadyExistsUsernameException();
